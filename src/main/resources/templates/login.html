@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Blood Buddy</title>
+  <meta name="description" content="Sign in to your Blood Buddy account to manage donations, request blood, and coordinate live assistance.">
+  <link rel="icon" type="image/svg+xml" href="/static/images/logo.svg">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="header" id="navbar">
+    <div class="container nav-container">
+      <a href="/dashboard" class="brand" aria-label="Blood Buddy Home">
+        <div class="brand-logo-wrap"><img src="/static/images/logo.svg" alt="Blood Buddy" width="38" height="38"></div>
+        <div class="brand-text"><span class="brand-name">Blood Buddy</span><span class="brand-tagline-sub">One Drop. A Thousand Hopes.</span></div>
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="/dashboard" class="nav-link">Home</a></li>
+          <li><a href="/find-donors" class="nav-link">Find Donors</a></li>
+          <li><a href="/camps" class="nav-link">Camps</a></li>
+          <li><a href="/become-donor" class="nav-link">Become a Donor</a></li>
+          <li><a href="/request-blood" class="nav-link">Request Blood</a></li>
+          <li><a href="/view-requests" class="nav-link">View Requests</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a href="/notifications" class="nav-utility-link" title="View Notifications">
+          <span>🔔 Alerts</span>
+        </a>
+        <a href="/login" class="btn btn-primary btn-sm">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="profile-main">
+    <div class="container" style="max-width: 480px;">
+      <div class="auth-card glass-panel" style="padding: 38px 32px; margin-top: 24px; border-radius: var(--radius-lg);">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div style="font-size: 2.8rem; margin-bottom: 8px;">🩸</div>
+          <h1 style="font-size: 1.8rem; margin: 0 0 8px; color: var(--text-white); font-family: var(--font-heading);">Sign In to Blood Buddy</h1>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; margin: 0;">One unified account for both voluntary donors and blood requesters.</p>
+        </div>
+
+        <form method="POST" action="/login" class="auth-form">
+          <div class="form-group" style="margin-bottom: 18px;">
+            <label for="identifier" style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Email or Username</label>
+            <div class="input-wrap">
+              <input type="text" id="identifier" name="identifier" required class="form-control" placeholder="e.g. name@example.com or username" autocomplete="username" style="width: 100%;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label for="password" style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Password</label>
+            <div class="input-wrap">
+              <input type="password" id="password" name="password" required class="form-control" placeholder="••••••••••••" autocomplete="current-password" style="width: 100%;">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 14px; font-size: 1rem;">
+            <span>Sign In</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-glass);">
+          <span style="color: var(--text-secondary); font-size: 0.9rem;">New to Blood Buddy?</span>
+          <a href="/register" style="color: var(--neon-coral); font-weight: 600; text-decoration: none; margin-left: 6px;">Create an Account →</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <div>&copy; 2026 Blood Buddy. Voluntary Blood Donation Coordination Network.</div>
+      <div>Preliminary ABO/Rh compatibility requires professional hospital confirmation. &bull; <a href="/admin/login" style="color: var(--text-muted); text-decoration: none;">Hospital Staff Portal</a></div>
+    </div>
+  </footer>
+</body>
+</html>

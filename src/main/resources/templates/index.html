@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Buddy — One Drop. A Thousand Hopes.</title>
+  <meta name="description" content="Blood Buddy connects voluntary blood donors with patients, emergency blood banks, and verified hospitals in real time. Transparent, compassionate, and life-saving.">
+  <meta name="keywords" content="blood donation, blood buddy, emergency blood, donors, blood compatibility, save lives">
+  <link rel="icon" type="image/svg+xml" href="/static/images/logo.svg">
+  
+  <!-- Modern Design System Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       NAVIGATION HEADER
+       ========================================================================== -->
+  <header class="header" id="navbar">
+    <div class="container nav-container">
+      <a href="/" class="brand" id="brandLogoLink">
+        <div class="brand-logo-wrap">
+          <img src="/static/images/logo.svg" alt="Blood Buddy Logo" width="38" height="38">
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Blood Buddy</span>
+          <span class="brand-tagline-sub">One Drop. A Thousand Hopes.</span>
+        </div>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="/dashboard" class="nav-link">Home</a></li>
+          <li><a href="/find-donors" class="nav-link">Find Donors</a></li>
+          <li><a href="/camps" class="nav-link">Camps</a></li>
+          <li><a href="/become-donor" class="nav-link">Become a Donor</a></li>
+          <li><a href="/request-blood" class="nav-link">Request Blood</a></li>
+          <li><a href="/view-requests" class="nav-link">View Requests</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/notifications" class="nav-utility-link" title="View Notifications">
+          <span>🔔 Alerts</span>
+        </a>
+        <a href="/login" class="btn btn-primary btn-sm" id="navSignInBtn">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        
+        <!-- Left Hero Copy -->
+        <div class="hero-content">
+          <div class="hero-label">
+            <span class="hero-label-dot"></span>
+            <span class="hero-label-text">Community Blood Network • Verified Regional Donors</span>
+          </div>
+
+          <h1 class="hero-title" id="mainHeroTitle">
+            <span class="highlight-red">One Drop.</span><br>A Thousand Hopes.
+          </h1>
+
+          <p class="hero-lead">
+            Welcome to <strong>Blood Buddy</strong> — the community-driven platform connecting voluntary blood donors, emergency patients, and hospitals in real time. We bridge the critical minutes when every drop counts.
+          </p>
+
+          <div class="hero-actions">
+            <a href="/find-donors" class="btn btn-primary" id="heroFindDonorsBtn">
+              <span>Find Donors</span>
+              <span class="btn-icon">→</span>
+            </a>
+            <a href="#how-it-works" class="btn btn-secondary" id="heroHowItWorksBtn" data-action="how-it-works">
+              <span>How It Works</span>
+              <span class="btn-icon">↓</span>
+            </a>
+          </div>
+
+          <!-- Clean Grounded Statistics Strip -->
+          <div class="hero-info-strip" id="heroStatsStrip">
+            <div class="info-strip-item">
+              <span class="info-strip-value">8</span>
+              <span class="info-strip-label">Blood Groups (All Types)</span>
+            </div>
+            <div class="info-strip-item">
+              <span class="info-strip-value">Verified</span>
+              <span class="info-strip-label">Voluntary Regional Donors</span>
+            </div>
+            <div class="info-strip-item">
+              <span class="info-strip-value">Direct</span>
+              <span class="info-strip-label">Community Coordination</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual with Animated 3D Human Heart, ECG Waveform & Subtle Orbits -->
+        <div class="hero-visual" id="heroVisualWrapper">
+          <div class="visual-canvas" id="heroVisualCanvas">
+            
+            <!-- 1. Ambient Radiance Background Synchronized with Heartbeat -->
+            <div class="ambient-glow-circle" id="heartAmbientGlow"></div>
+
+            <!-- 2. Subtle Elliptical Orbit Lines behind heart -->
+            <div class="hero-orbits-wrap" aria-hidden="true">
+              <svg class="hero-orbit-svg" viewBox="0 0 600 600" width="100%" height="100%">
+                <defs>
+                  <linearGradient id="orbitGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#E53935" stop-opacity="0.55" />
+                    <stop offset="30%" stop-color="#C62828" stop-opacity="0.25" />
+                    <stop offset="70%" stop-color="#8E001A" stop-opacity="0.10" />
+                    <stop offset="100%" stop-color="#E53935" stop-opacity="0.45" />
+                  </linearGradient>
+                  <linearGradient id="orbitGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#FF5252" stop-opacity="0.45" />
+                    <stop offset="40%" stop-color="#8E001A" stop-opacity="0.12" />
+                    <stop offset="70%" stop-color="#C62828" stop-opacity="0.28" />
+                    <stop offset="100%" stop-color="#FF5252" stop-opacity="0.40" />
+                  </linearGradient>
+                </defs>
+                <ellipse cx="300" cy="300" rx="260" ry="98" transform="rotate(-22 300 300)" fill="none" stroke="url(#orbitGrad1)" stroke-width="1.5" stroke-dasharray="10 8" class="orbit-ellipse orbit-1" />
+                <ellipse cx="300" cy="300" rx="275" ry="86" transform="rotate(26 300 300)" fill="none" stroke="url(#orbitGrad2)" stroke-width="1.5" stroke-dasharray="14 9" class="orbit-ellipse orbit-2" />
+              </svg>
+            </div>
+
+            <!-- 3. Glowing ECG Heartbeat Line spanning horizontally behind the heart -->
+            <div class="hero-ecg-wrap" id="heroEcgWrap" aria-hidden="true">
+              <svg class="hero-ecg-svg" viewBox="0 0 800 140" preserveAspectRatio="none" width="100%" height="100%">
+                <defs>
+                  <filter id="ecgGlowFilter" x="-20%" y="-50%" width="140%" height="200%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur1" />
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur2" />
+                    <feMerge>
+                      <feMergeNode in="blur2" />
+                      <feMergeNode in="blur1" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <linearGradient id="ecgLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#E53935" stop-opacity="0.0" />
+                    <stop offset="10%" stop-color="#E53935" stop-opacity="0.85" />
+                    <stop offset="42%" stop-color="#FF5252" stop-opacity="0.5" />
+                    <stop offset="58%" stop-color="#FF5252" stop-opacity="0.5" />
+                    <stop offset="90%" stop-color="#E53935" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#E53935" stop-opacity="0.0" />
+                  </linearGradient>
+                </defs>
+                <!-- Base ECG line with prominent heartbeat spikes on both sides of the heart -->
+                <path class="ecg-base-line" d="M 0,70 L 50,70 Q 70,62 90,70 L 105,75 L 125,12 L 138,102 L 150,70 Q 175,54 200,70 L 270,70 L 400,70 L 530,70 L 590,70 Q 610,62 630,70 L 645,75 L 665,10 L 678,104 L 690,70 Q 715,54 740,70 L 800,70" fill="none" stroke="url(#ecgLineGrad)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+                <!-- Glowing animated traveling pulse trace -->
+                <path class="ecg-pulse-trace" id="ecgPulseTrace" d="M 0,70 L 50,70 Q 70,62 90,70 L 105,75 L 125,12 L 138,102 L 150,70 Q 175,54 200,70 L 270,70 L 400,70 L 530,70 L 590,70 Q 610,62 630,70 L 645,75 L 665,10 L 678,104 L 690,70 Q 715,54 740,70 L 800,70" fill="none" stroke="#FF8A80" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#ecgGlowFilter)" />
+              </svg>
+            </div>
+
+            <!-- 4. Central Large 3D Human Heart Centerpiece -->
+            <div class="heart-3d-hero-container" id="heart3DContainer" role="img" aria-label="Anatomical 3D Human Heart Beating Continuously">
+              <canvas id="heartCanvas" class="heart-canvas"></canvas>
+
+              <!-- Graceful Fallback if WebGL/3D unavailable -->
+              <div class="heart-fallback" id="heartFallback" style="display: none; opacity: 0;">
+                <img src="/static/images/heart-fallback.svg" alt="Anatomical Human Heart" width="460" height="510" class="heart-fallback-img">
+              </div>
+
+              <!-- Initial Heartbeat Loader Spinner -->
+              <div class="heart-loader" id="heartLoader" aria-hidden="true">
+                <span class="heart-pulse-spinner"></span>
+              </div>
+            </div>
+
+            <!-- 5. Orderly Network Status Pill -->
+            <div class="hero-system-status">
+              <span class="status-indicator"></span>
+              <span>Live Network Active • Verified Healthcare Nodes</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HOW IT WORKS SECTION
+         ========================================================================== -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Streamlined & Compassionate</span>
+          <h2 class="section-title">How Blood Buddy Works</h2>
+          <p class="section-desc">
+            Designed for critical speed during medical emergencies and effortless engagement for regular donors.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <!-- Step 1 -->
+          <article class="step-card" id="step1Card">
+            <span class="step-number">01</span>
+            <div class="step-icon-wrap step-icon-1">📋</div>
+            <h3 class="step-title">1. Sign Up &amp; Verify</h3>
+            <p class="step-desc">
+              Donors and seekers register in seconds. Profile verification ensures safe, reliable, and authentic medical interactions.
+            </p>
+          </article>
+
+          <!-- Step 2 -->
+          <article class="step-card" id="step2Card">
+            <span class="step-number">02</span>
+            <div class="step-icon-wrap step-icon-2">📍</div>
+            <h3 class="step-title">2. Proximity Match</h3>
+            <p class="step-desc">
+              Our smart matching engine evaluates blood compatibility and geographic radius, notifying the closest available donors instantly.
+            </p>
+          </article>
+
+          <!-- Step 3 -->
+          <article class="step-card" id="step3Card">
+            <span class="step-number">03</span>
+            <div class="step-icon-wrap step-icon-3">❤️</div>
+            <h3 class="step-title">3. Coordinate &amp; Save Lives</h3>
+            <p class="step-desc">
+              Direct and transparent communication between donors, hospital blood banks, and families, ensuring safe transfusions without delay.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTERACTIVE COMPATIBILITY CHECKER TOOL
+         ========================================================================== -->
+    <section class="compat-section" id="compatibility">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Interactive Clinical Matrix</span>
+          <h2 class="section-title">Blood Group Compatibility Quick-Tool</h2>
+          <p class="section-desc">
+            Select a blood type below to immediately see life-saving giving and receiving compatibility.
+          </p>
+        </div>
+
+        <div class="compat-card">
+          <!-- Blood Selectors -->
+          <div class="blood-selector-row" role="group" aria-label="Select Blood Type">
+            <button class="blood-pill-btn active" data-blood="O-">O-</button>
+            <button class="blood-pill-btn" data-blood="O+">O+</button>
+            <button class="blood-pill-btn" data-blood="A-">A-</button>
+            <button class="blood-pill-btn" data-blood="A+">A+</button>
+            <button class="blood-pill-btn" data-blood="B-">B-</button>
+            <button class="blood-pill-btn" data-blood="B+">B+</button>
+            <button class="blood-pill-btn" data-blood="AB-">AB-</button>
+            <button class="blood-pill-btn" data-blood="AB+">AB+</button>
+          </div>
+
+          <!-- Compatibility Breakdown -->
+          <div class="compat-results-grid">
+            <div class="compat-box">
+              <div class="compat-box-header">
+                <div class="compat-badge-icon box-coral">↑</div>
+                <h3 class="compat-box-title">Can Donate Blood To:</h3>
+              </div>
+              <div class="blood-tags-list" id="compat-give-list">
+                <!-- Dynamically populated via JS -->
+              </div>
+            </div>
+
+            <div class="compat-box">
+              <div class="compat-box-header">
+                <div class="compat-badge-icon box-cyan">↓</div>
+                <h3 class="compat-box-title">Can Receive Blood From:</h3>
+              </div>
+              <div class="blood-tags-list" id="compat-receive-list">
+                <!-- Dynamically populated via JS -->
+              </div>
+            </div>
+          </div>
+
+          <p class="compat-summary-text" id="compat-summary">
+            Universal Red Cell Donor: Your blood can save anyone in an emergency, making you invaluable!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PLATFORM FEATURES / PILLARS
+         ========================================================================== -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Built For Trust &amp; Speed</span>
+          <h2 class="section-title">Why Blood Buddy?</h2>
+          <p class="section-desc">
+            Every technical choice is optimized for simplicity, zero friction, and high reliability in healthcare emergencies.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="feature-icon box-coral">⚡</div>
+            <div class="feature-content">
+              <h4>Real-Time Emergency Broadcasts</h4>
+              <p>Alert verified donors in a localized radius within seconds when rare blood groups are critically demanded.</p>
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon box-mint">🛡️</div>
+            <div class="feature-content">
+              <h4>Privacy First &amp; Safe Contact</h4>
+              <p>Personal phone numbers and locations are shielded until donor mutual confirmation is established.</p>
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon box-cyan">🏥</div>
+            <div class="feature-content">
+              <h4>Direct Hospital &amp; Bank Network</h4>
+              <p>Integrated coordination with accredited healthcare facilities and authorized blood storage centers.</p>
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon box-mint">⏱️</div>
+            <div class="feature-content">
+              <h4>Donor Interval Tracking</h4>
+              <p>Automatic eligibility scheduling ensuring donors are healthy, rested, and ready for their next donation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       GET STARTED INTERACTIVE MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="journeyModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" data-action="close-modal" aria-label="Close dialog">&times;</button>
+      
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Welcome to Blood Buddy</h3>
+        <p class="modal-desc">Select how you would like to participate today:</p>
+      </div>
+
+      <div class="journey-options">
+        <div class="journey-card" data-role="Donor">
+          <div class="journey-icon">🩸</div>
+          <h4 class="journey-name">I Want to Donate</h4>
+          <p class="journey-text">Register as a voluntary donor and respond when someone in the community needs your blood group.</p>
+        </div>
+
+        <div class="journey-card" data-role="Recipient">
+          <div class="journey-icon">🆘</div>
+          <h4 class="journey-name">I Need Blood</h4>
+          <p class="journey-text">Submit an urgent blood requisition or search available compatible donors across Rajahmundry.</p>
+        </div>
+      </div>
+
+      <div class="modal-stage2-note">
+        <span>ℹ️</span>
+        <span>Connecting voluntary blood donors with patients across Rajahmundry. Select your role above to proceed.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="brand">
+            <div class="brand-logo-wrap">
+              <img src="/static/images/logo.svg" alt="Blood Buddy" width="36" height="36">
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">Blood Buddy</span>
+            </div>
+          </div>
+          <p class="footer-brand-desc">
+            One Drop. A Thousand Hopes. Transforming the voluntary blood donation experience through compassionate community coordination.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul class="footer-links">
+            <li><a href="/dashboard">Home Dashboard</a></li>
+            <li><a href="/find-donors">Find Donors</a></li>
+            <li><a href="/camps">Blood Donation Camps</a></li>
+            <li><a href="/become-donor">Become a Donor</a></li>
+            <li><a href="/request-blood">Request Blood</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Community</h5>
+          <ul class="footer-links">
+            <li><a href="/about">Platform Guide</a></li>
+            <li><a href="/compatibility">Compatibility Tool</a></li>
+            <li><a href="/notifications">Community Alerts</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Healthcare Emergency</h5>
+          <ul class="footer-links">
+            <li><a href="tel:108" style="color: var(--neon-coral); font-weight: 700;">🚨 Emergency Helpline: 108</a></li>
+            <li><a href="/find-donors">Rajahmundry Govt Hospital</a></li>
+            <li><a href="/about">Red Cross Society Rajahmundry</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Blood Buddy. Community Blood Donation Coordination. All rights reserved. <a href="/admin/login" style="color: var(--text-muted); font-size: 0.8rem; margin-left: 1rem;">Hospital Staff Portal</a></div>
+        <div class="backend-status-badge" id="backendStatus">
+          <span class="status-dot"></span> System Active &amp; Operational
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 3D Heart Visualization (Three.js WebGL & Anatomical GLTF Model) -->
+  <script src="/static/js/three.min.js"></script>
+  <script src="/static/js/GLTFLoader.js"></script>
+  <script src="/static/js/heart-3d.js?v=3.0"></script>
+
+  <!-- Frontend Interactions -->
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

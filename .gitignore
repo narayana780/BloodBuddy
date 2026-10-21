@@ -1,0 +1,53 @@
+# ==============================================================================
+# Blood Buddy — .gitignore
+# ==============================================================================
+
+# Compiled Java class files & Maven build output
+target/
+*.class
+
+# Embedded Tomcat runtime work directories
+tomcat.*
+*.war
+*.ear
+
+# Local runtime logs & dumps
+*.log
+logs/
+
+# Development Tools & local binaries
+.tools/
+
+# IDE & Editor specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+.metadata
+bin/
+
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+
+# Operating System temporary files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Private runtime application storage
+# Sensitive donor information, user accounts, and messages are kept local.
+# Fresh checkouts initialize safely using data.template/ or empty data directory.
+data/*.json
+!data/.gitkeep
+
+# Temporary root diagnostic image captures (source images live in src/main/resources & docs/)
+/*.png
