@@ -174,10 +174,17 @@
 
     // 4. Load 3D Anatomical Model
     var gltfLoader = new THREE.GLTFLoader();
-    var modelUrl = '/static/models/human_heart.glb';
+    var modelUrl = (function () {
+      var p = window.location.pathname;
+      if (p.indexOf('/BloodBuddy') === 0) {
+        return '/BloodBuddy/static/models/human_heart.glb';
+      }
+      return 'static/models/human_heart.glb';
+    })();
 
-    gltfLoader.load(
-      modelUrl,
+    function loadHeartModel(url, attempt) {
+      gltfLoader.load(
+        url,
       function (gltf) {
         var model = gltf.scene;
 
@@ -268,10 +275,22 @@
       },
       undefined,
       function (error) {
-        console.warn('[Heart3D] Error loading 3D heart model, falling back to SVG illustration:', error);
-        showFallback();
+        if (attempt === 1) {
+          var altUrl = url.startsWith('/') ? url.substring(1) : '/' + url;
+          console.warn('[Heart3D] Attempt 1 failed for ' + url + ', retrying fallback: ' + altUrl);
+          loadHeartModel(altUrl, 2);
+        } else if (attempt === 2) {
+          console.warn('[Heart3D] Attempt 2 failed, retrying with relative ./static/models/human_heart.glb');
+          loadHeartModel('./static/models/human_heart.glb', 3);
+        } else {
+          console.warn('[Heart3D] Error loading 3D heart model, falling back to SVG illustration:', error);
+          showFallback();
+        }
       }
     );
+    }
+
+    loadHeartModel(modelUrl, 1);
 
     // 5. Interactive Mouse Parallax
     var mouseX = 0;

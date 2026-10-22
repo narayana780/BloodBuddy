@@ -10,10 +10,19 @@ public final class AppConfig {
     public static final String APP_NAME = "Blood Buddy";
     public static final String TAGLINE = "One Drop. A Thousand Hopes.";
     public static final String APP_VERSION = "1.0.0-SNAPSHOT";
+    public static final String DEFAULT_HOST = "0.0.0.0";
     public static final int DEFAULT_PORT = 8080;
 
+    private static String resolveDataDir() {
+        String envDataDir = System.getenv("BLOODBUDDY_DATA_DIR");
+        if (envDataDir != null && !envDataDir.trim().isEmpty()) {
+            return envDataDir.trim();
+        }
+        return System.getProperty("user.dir") + File.separator + "data";
+    }
+
     // Base storage directory for local file storage in subsequent stages
-    public static final String DATA_DIR = System.getProperty("user.dir") + File.separator + "data";
+    public static final String DATA_DIR = resolveDataDir();
     public static final String REGISTERED_DONORS_FILE = DATA_DIR + File.separator + "registered_donors.json";
     public static final String BLOOD_REQUESTS_FILE = DATA_DIR + File.separator + "blood_requests.json";
     public static final String NOTIFICATIONS_FILE = DATA_DIR + File.separator + "notifications.json";
@@ -76,6 +85,14 @@ public final class AppConfig {
         // Prevent instantiation
     }
 
+    public static String getServerHost() {
+        String envHost = System.getenv("HOST");
+        if (envHost != null && !envHost.trim().isEmpty()) {
+            return envHost.trim();
+        }
+        return DEFAULT_HOST;
+    }
+
     public static int getServerPort() {
         String envPort = System.getenv("PORT");
         if (envPort != null && !envPort.trim().isEmpty()) {
@@ -93,6 +110,23 @@ public final class AppConfig {
             boolean created = dir.mkdirs();
             if (created) {
                 System.out.println("[AppConfig] Created local storage directory at: " + dir.getAbsolutePath());
+            }
+        }
+
+        // Initialize empty files from data.template if target files are missing
+        File templateDir = new File(System.getProperty("user.dir") + File.separator + "data.template");
+        if (templateDir.exists() && templateDir.isDirectory()) {
+            File[] templates = templateDir.listFiles((d, name) -> name.endsWith(".json"));
+            if (templates != null) {
+                for (File tpl : templates) {
+                    File target = new File(dir, tpl.getName());
+                    if (!target.exists()) {
+                        try {
+                            java.nio.file.Files.copy(tpl.toPath(), target.toPath());
+                        } catch (Exception ignored) {
+                        }
+                    }
+                }
             }
         }
     }

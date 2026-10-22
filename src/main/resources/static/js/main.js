@@ -1,17 +1,21 @@
 /**
  * Blood Buddy — Frontend Interactions & Health Verification
- * Stage 10 Final Polish: Seamless modal navigation, health checking, and accessibility.
+ * GitHub Pages static preview support with dynamic backend requirement modals.
  */
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Backend Connectivity & Health Check
     const backendStatusEl = document.getElementById('backendStatus');
     const liveNetworkPill = document.getElementById('liveNetworkPill');
+    let isBackendActive = false;
 
     async function checkBackendHealth() {
         try {
-            const resp = await fetch('/api/status', { cache: 'no-store' });
+            const p = window.location.pathname;
+            const apiPath = p.indexOf('/BloodBuddy') === 0 ? '/BloodBuddy/api/status' : '/api/status';
+            const resp = await fetch(apiPath, { cache: 'no-store' });
             if (resp.ok) {
                 const data = await resp.json();
+                isBackendActive = true;
                 if (backendStatusEl) {
                     backendStatusEl.innerHTML = '<span class="status-dot"></span> Backend Online (' + (data.app || 'Blood Buddy') + ' v' + (data.version || '1.0') + ')';
                     backendStatusEl.style.color = 'var(--mint)';
@@ -28,8 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function markBackendOffline() {
+        isBackendActive = false;
         if (backendStatusEl) {
-            backendStatusEl.innerHTML = '<span class="status-dot resting"></span> Backend Disconnected';
+            backendStatusEl.innerHTML = '<span class="status-dot resting"></span> Static Preview Mode (Backend Offline)';
             backendStatusEl.style.color = 'var(--neon-coral)';
         }
     }
@@ -38,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Journey Modal Handling
     const journeyModal = document.getElementById('journeyModal');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalCloseBtn = journeyModal ? journeyModal.querySelector('[data-action="close-modal"]') : null;
     const getStartedBtns = document.querySelectorAll('[data-action="get-started"]');
     const howItWorksBtns = document.querySelectorAll('[data-action="how-it-works"]');
 
@@ -78,17 +83,91 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 3. Backend Requirement Notice Modal (for GitHub Pages static preview)
+    const backendNoticeModal = document.getElementById('backendNoticeModal');
+    const backendNoticeCloseBtn = document.getElementById('backendNoticeCloseBtn');
+    const backendNoticeDismissBtn = document.getElementById('backendNoticeDismissBtn');
+    const backendNoticeDesc = document.getElementById('backendNoticeDesc');
+
+    function openBackendNotice(featureName) {
+        closeModal();
+        if (backendNoticeModal) {
+            if (backendNoticeDesc && featureName) {
+                backendNoticeDesc.textContent = "The '" + featureName + "' feature requires the active Blood Buddy Java/Tomcat backend with persistent JSON storage.";
+            }
+            backendNoticeModal.classList.add('active');
+            backendNoticeModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            if (backendNoticeCloseBtn) backendNoticeCloseBtn.focus();
+        }
+    }
+
+    function closeBackendNotice() {
+        if (backendNoticeModal) {
+            backendNoticeModal.classList.remove('active');
+            backendNoticeModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (backendNoticeCloseBtn) backendNoticeCloseBtn.addEventListener('click', closeBackendNotice);
+    if (backendNoticeDismissBtn) backendNoticeDismissBtn.addEventListener('click', closeBackendNotice);
+    if (backendNoticeModal) {
+        backendNoticeModal.addEventListener('click', (e) => {
+            if (e.target === backendNoticeModal) {
+                closeBackendNotice();
+            }
+        });
+    }
+
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && journeyModal && journeyModal.classList.contains('active')) {
-            closeModal();
+        if (e.key === 'Escape') {
+            if (journeyModal && journeyModal.classList.contains('active')) closeModal();
+            if (backendNoticeModal && backendNoticeModal.classList.contains('active')) closeBackendNotice();
         }
     });
 
-    // 3. Journey Card Navigation
+    // 4. Intercept Server Routes when running on GitHub Pages (static mode)
+    const isGitHubPages = window.location.hostname.endsWith('github.io') || window.location.protocol === 'file:';
+
+    document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+
+        // Skip internal anchors and external links
+        if (href.startsWith('#') || href.startsWith('tel:') || href.startsWith('mailto:') || href.startsWith('http://') || href.startsWith('https://')) {
+            return;
+        }
+
+        // Server-side dynamic routes
+        const serverRoutes = [
+            '/find-donors', '/become-donor', '/request-blood', '/view-requests',
+            '/camps', '/notifications', '/login', '/register', '/admin',
+            '/dashboard', '/compatibility', '/about', '/help', '/chat', '/messages'
+        ];
+
+        const matchesServerRoute = serverRoutes.some(route => href === route || href.startsWith(route + '?') || href.startsWith(route + '/'));
+
+        if (matchesServerRoute) {
+            link.addEventListener('click', (e) => {
+                if (!isBackendActive || isGitHubPages) {
+                    e.preventDefault();
+                    const featureTitle = link.textContent.trim().replace(/[→↓🔔🚨]/g, '').trim() || href;
+                    openBackendNotice(featureTitle);
+                }
+            });
+        }
+    });
+
+    // 5. Journey Card Navigation
     const journeyCards = document.querySelectorAll('.journey-card');
     journeyCards.forEach(card => {
         card.addEventListener('click', () => {
             const role = card.getAttribute('data-role');
+            if (!isBackendActive || isGitHubPages) {
+                openBackendNotice(role === 'Donor' ? 'Voluntary Donor Registration' : 'Patient Blood Requisition');
+                return;
+            }
             if (role === 'Donor') {
                 window.location.href = '/become-donor';
             } else if (role === 'Recipient') {
@@ -108,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Smooth Scrolling for Anchor Links
+    // 6. Smooth Scrolling for Anchor Links
     howItWorksBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -117,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth' });
             } else {
-                window.location.href = '/#how-it-works';
+                window.location.href = '#how-it-works';
             }
         });
     });

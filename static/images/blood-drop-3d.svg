@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 600" width="100%" height="100%" aria-label="Anatomical 3D Human Heart">
+  <defs>
+    <!-- Soft Depth Blur & Glow Filters -->
+    <filter id="heartRimGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="ambientHeartAura" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="28" result="blur" />
+    </filter>
+    <filter id="vesselGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Myocardial Muscle Gradients (Rich Deep Crimson, Ruby & Scarlet) -->
+    <radialGradient id="myoBaseGrad" cx="45%" cy="46%" r="62%">
+      <stop offset="0%" stop-color="#FF3355" />
+      <stop offset="22%" stop-color="#E52040" />
+      <stop offset="50%" stop-color="#C61530" />
+      <stop offset="78%" stop-color="#8E081C" />
+      <stop offset="100%" stop-color="#4A020E" />
+    </radialGradient>
+
+    <radialGradient id="leftVentricleMass" cx="64%" cy="54%" r="52%">
+      <stop offset="0%" stop-color="#FF4060" />
+      <stop offset="30%" stop-color="#D31D38" />
+      <stop offset="68%" stop-color="#90091E" />
+      <stop offset="100%" stop-color="#44020C" />
+    </radialGradient>
+
+    <!-- Aorta Arch (Vibrant Oxygenated Ruby Red) -->
+    <linearGradient id="aortaArchGrad" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B81" />
+      <stop offset="25%" stop-color="#FF2D55" />
+      <stop offset="65%" stop-color="#D81B40" />
+      <stop offset="100%" stop-color="#7A0014" />
+    </linearGradient>
+
+    <!-- Pulmonary Trunk (Oxygenated Deep Indigo-Slate) -->
+    <linearGradient id="pulmonaryTrunkGrad" x1="0%" y1="20%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#5C6BC0" />
+      <stop offset="42%" stop-color="#3949AB" />
+      <stop offset="80%" stop-color="#283593" />
+      <stop offset="100%" stop-color="#1A237E" />
+    </linearGradient>
+
+    <!-- Superior Vena Cava (Deoxygenated Royal Cobalt) -->
+    <linearGradient id="venaCavaTrunkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#42A5F5" />
+      <stop offset="45%" stop-color="#1E88E5" />
+      <stop offset="85%" stop-color="#1565C0" />
+      <stop offset="100%" stop-color="#0D47A1" />
+    </linearGradient>
+
+    <!-- Specular Wet Pericardium Sheen -->
+    <linearGradient id="wetTissueSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.75" />
+      <stop offset="35%" stop-color="#FFCDD2" stop-opacity="0.30" />
+      <stop offset="75%" stop-color="#FFCDD2" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Tasteful Red Rim Light Gradient -->
+    <linearGradient id="rimRedLight" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF1744" stop-opacity="0.85" />
+      <stop offset="50%" stop-color="#FF5252" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#D50000" stop-opacity="0.80" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Ambient Red Silhouette Glow -->
+  <ellipse cx="265" cy="330" rx="195" ry="215" fill="#C61530" opacity="0.18" filter="url(#ambientHeartAura)" />
+
+  <g filter="url(#heartRimGlow)">
+    <!-- 1. Superior Vena Cava (Right Atrium Entry) -->
+    <path d="M 195 150 C 195 100, 210 75, 226 70 C 242 65, 252 85, 252 135 C 252 165, 240 185, 224 195 Z" fill="url(#venaCavaTrunkGrad)" />
+    <!-- Vena Cava highlight -->
+    <path d="M 210 82 C 218 80, 225 88, 227 120 C 229 148, 222 170, 215 175" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round" fill="none" />
+
+    <!-- 2. Aortic Arch with Three Great Arterial Trunks -->
+    <!-- Branch 1: Brachiocephalic Artery -->
+    <path d="M 252 90 C 252 48, 264 42, 271 42 C 278 42, 282 52, 280 92 Z" fill="url(#aortaArchGrad)" />
+    <path d="M 258 52 C 265 48, 273 50, 272 80" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" fill="none" />
+
+    <!-- Branch 2: Left Common Carotid Artery -->
+    <path d="M 284 86 C 286 52, 294 46, 300 46 C 307 46, 310 56, 308 92 Z" fill="url(#aortaArchGrad)" />
+    <path d="M 289 56 C 295 52, 302 54, 300 82" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" fill="none" />
+
+    <!-- Branch 3: Left Subclavian Artery -->
+    <path d="M 314 94 C 318 64, 327 58, 334 58 C 341 58, 343 68, 338 102 Z" fill="url(#aortaArchGrad)" />
+    <path d="M 321 68 C 328 64, 334 66, 331 92" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" fill="none" />
+
+    <!-- Main Aortic Arch Curve -->
+    <path d="M 230 170 C 224 112, 258 75, 308 80 C 356 85, 382 125, 372 185 C 366 212, 350 230, 334 240 C 322 222, 306 200, 290 190 C 258 170, 238 172, 230 170 Z" fill="url(#aortaArchGrad)" />
+    <!-- Aorta Arch Specular Highlight -->
+    <path d="M 250 120 C 274 96, 322 100, 352 132" stroke="rgba(255,255,255,0.65)" stroke-width="4.5" stroke-linecap="round" fill="none" />
+
+    <!-- 3. Pulmonary Trunk & Branches -->
+    <path d="M 262 195 C 256 156, 296 145, 330 156 C 362 166, 378 194, 368 222 C 352 244, 314 254, 282 238 C 265 227, 265 209, 262 195 Z" fill="url(#pulmonaryTrunkGrad)" />
+    <path d="M 334 172 C 362 178, 394 168, 416 184 C 410 201, 384 206, 356 195 Z" fill="url(#pulmonaryTrunkGrad)" />
+    <path d="M 280 184 C 302 168, 342 176, 358 195" stroke="rgba(255,255,255,0.35)" stroke-width="3" stroke-linecap="round" fill="none" />
+
+    <!-- 4. Left Atrium / Left Auricle -->
+    <path d="M 350 220 C 384 232, 400 260, 394 294 C 388 316, 366 328, 344 322 C 332 288, 338 248, 350 220 Z" fill="#750616" />
+
+    <!-- 5. Right Atrium & Auricle -->
+    <path d="M 172 220 C 154 242, 148 290, 166 330 C 182 362, 216 372, 232 355 C 226 308, 216 260, 198 226 C 188 214, 178 214, 172 220 Z" fill="#9E0C22" />
+    <path d="M 166 255 C 160 282, 164 310, 178 328" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-linecap="round" fill="none" />
+
+    <!-- 6. Left & Right Ventricles (Primary Anatomical Cardiac Muscle Mass) -->
+    <!-- Left Ventricle Lateral Wall & Posterior Mass -->
+    <path d="M 230 250 C 296 218, 394 250, 400 338 C 406 414, 346 500, 292 538 C 280 546, 264 546, 254 534 C 214 484, 176 404, 182 318 C 186 268, 208 256, 230 250 Z" fill="url(#leftVentricleMass)" />
+
+    <!-- Anterior Ventricular Body with Prominent Anatomical Curvature -->
+    <path d="M 220 262 C 274 246, 340 274, 350 338 C 362 408, 324 490, 278 530 C 266 538, 254 534, 248 522 C 204 464, 182 384, 194 314 C 200 282, 210 270, 220 262 Z" fill="url(#myoBaseGrad)" />
+
+    <!-- Tasteful Glowing Red Rim Silhouette along Outer Margin -->
+    <path d="M 230 250 C 296 218, 394 250, 400 338 C 406 414, 346 500, 292 538 C 280 546, 264 546, 254 534 C 214 484, 176 404, 182 318" stroke="url(#rimRedLight)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.88" />
+
+    <!-- 7. Coronary Sulcus, Arteries & Interventricular Vessels -->
+    <!-- Anterior Interventricular Sulcus / Left Anterior Descending (LAD) Coronary Artery -->
+    <path d="M 292 272 Q 285 340 296 384 T 268 470 T 260 528" stroke="#FF1744" stroke-width="6" stroke-linecap="round" fill="none" filter="url(#vesselGlow)" />
+    <path d="M 292 272 Q 285 340 296 384 T 268 470 T 260 528" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" fill="none" />
+
+    <!-- Great Cardiac Vein (Deoxygenated Deep Slate Blue) -->
+    <path d="M 300 278 Q 294 346 304 390 T 276 476" stroke="#3949AB" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85" />
+
+    <!-- Diagonal Arterial Branches (Supplying LV Anterior Wall) -->
+    <path d="M 292 328 Q 264 350 242 368" stroke="#FF3D60" stroke-width="3.2" stroke-linecap="round" fill="none" />
+    <path d="M 295 372 Q 275 400 252 422" stroke="#FF3D60" stroke-width="2.8" stroke-linecap="round" fill="none" />
+    <path d="M 298 384 Q 326 402 348 412" stroke="#FF3D60" stroke-width="2.8" stroke-linecap="round" fill="none" />
+    <path d="M 274 450 Q 252 466 242 488" stroke="#FF3D60" stroke-width="2.2" stroke-linecap="round" fill="none" />
+    <path d="M 276 462 Q 296 478 312 488" stroke="#FF3D60" stroke-width="2.2" stroke-linecap="round" fill="none" />
+
+    <!-- Right Ventricular Marginal Branches -->
+    <path d="M 220 285 Q 204 318 194 356" stroke="#FF3D60" stroke-width="3.2" stroke-linecap="round" fill="none" />
+    <path d="M 198 340 Q 215 362 226 384" stroke="#FF3D60" stroke-width="2.4" stroke-linecap="round" fill="none" />
+
+    <!-- 8. Specular Curvature Highlights (Moist Pericardial Living Gloss) -->
+    <path d="M 215 285 C 238 274, 272 280, 288 302 C 278 318, 255 324, 232 330 C 215 324, 210 302, 215 285 Z" fill="url(#wetTissueSheen)" opacity="0.65" />
+    <path d="M 314 308 C 348 324, 370 362, 364 406 C 352 400, 336 368, 320 340 Z" fill="url(#wetTissueSheen)" opacity="0.45" />
+    <path d="M 235 436 C 246 474, 258 506, 264 520" stroke="rgba(255,255,255,0.35)" stroke-width="3" stroke-linecap="round" fill="none" />
+
+    <!-- 9. Adipose Fat Tissue in Sulci (Realistic Biological Detail) -->
+    <ellipse cx="286" cy="268" rx="15" ry="8" fill="#FFE082" opacity="0.32" />
+    <ellipse cx="298" cy="290" rx="11" ry="6" fill="#FFE082" opacity="0.25" />
+    <ellipse cx="280" cy="354" rx="9" ry="5" fill="#FFE082" opacity="0.22" />
+  </g>
+</svg>

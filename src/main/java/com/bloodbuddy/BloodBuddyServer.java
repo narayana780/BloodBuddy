@@ -38,11 +38,15 @@ public class BloodBuddyServer {
 
     public static void main(String[] args) {
         AppConfig.initializeStorage();
+        String host = AppConfig.getServerHost();
         int port = AppConfig.getServerPort();
 
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(port);
-        tomcat.getConnector(); // Initialize default HTTP connector
+        org.apache.catalina.connector.Connector connector = tomcat.getConnector();
+        connector.setPort(port);
+        connector.setProperty("address", host);
+
 
         // Set base directory for Tomcat work files
         File tempBaseDir = new File(System.getProperty("java.io.tmpdir"), "bloodbuddy-tomcat");
@@ -181,17 +185,20 @@ public class BloodBuddyServer {
         // 5. HealthCheckServlet for API status checks
         Tomcat.addServlet(ctx, "HealthCheckServlet", new HealthCheckServlet());
         ctx.addServletMappingDecoded("/api/status", "HealthCheckServlet");
+        ctx.addServletMappingDecoded("/health", "HealthCheckServlet");
+        ctx.addServletMappingDecoded("/healthz", "HealthCheckServlet");
 
         try {
             System.out.println("==================================================");
             System.out.println("  Starting " + AppConfig.APP_NAME + " Web Server");
             System.out.println("  Tagline: " + AppConfig.TAGLINE);
+            System.out.println("  Host:    " + host);
             System.out.println("  Port:    " + port);
-            System.out.println("  URL:     http://localhost:" + port);
+            System.out.println("  URL:     http://" + (host.equals("0.0.0.0") ? "localhost" : host) + ":" + port);
             System.out.println("==================================================");
 
             tomcat.start();
-            System.out.println("[BloodBuddyServer] Server started successfully and listening on http://localhost:" + port);
+            System.out.println("[BloodBuddyServer] Server started successfully and listening on " + host + ":" + port);
 
             // Graceful shutdown hook
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {

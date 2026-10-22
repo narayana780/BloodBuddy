@@ -261,8 +261,8 @@ public class UnifiedAuthTest {
         System.out.println("\n[Test 10] Testing Preservation of Seed & Registered Records...");
         List<Donor> allDonors = donorService.getAllDemonstrationDonors();
         assertTrue("Seed donors and registered donors are preserved intact (>= 12)", allDonors.size() >= 12);
-        assertTrue("DEMO-01 Aarav Varma exists", allDonors.stream().anyMatch(d -> "DEMO-01".equals(d.getId())));
-        assertTrue("DEMO-04 Sneha Reddy exists", allDonors.stream().anyMatch(d -> "DEMO-04".equals(d.getId())));
+        assertTrue("VOL-01 Aarav Varma exists", allDonors.stream().anyMatch(d -> ("VOL-01".equals(d.getId()) || "DEMO-01".equals(d.getId())) && "Aarav Varma".equalsIgnoreCase(d.getName())));
+        assertTrue("VOL-04 Sneha Reddy exists", allDonors.stream().anyMatch(d -> ("VOL-04".equals(d.getId()) || "DEMO-04".equals(d.getId())) && "Sneha Reddy".equalsIgnoreCase(d.getName())));
 
         // 11. Notification Delivery
         System.out.println("\n[Test 11] Testing Notification Delivery for Account & Request...");

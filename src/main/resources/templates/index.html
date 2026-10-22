@@ -6,10 +6,10 @@
   <title>Blood Buddy — One Drop. A Thousand Hopes.</title>
   <meta name="description" content="Blood Buddy connects voluntary blood donors with patients, emergency blood banks, and verified hospitals in real time. Transparent, compassionate, and life-saving.">
   <meta name="keywords" content="blood donation, blood buddy, emergency blood, donors, blood compatibility, save lives">
-  <link rel="icon" type="image/svg+xml" href="/static/images/logo.svg">
+  <link rel="icon" type="image/svg+xml" href="static/images/logo.svg">
   
   <!-- Modern Design System Stylesheet -->
-  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
 
@@ -18,9 +18,9 @@
        ========================================================================== -->
   <header class="header" id="navbar">
     <div class="container nav-container">
-      <a href="/" class="brand" id="brandLogoLink">
+      <a href="./" class="brand" id="brandLogoLink">
         <div class="brand-logo-wrap">
-          <img src="/static/images/logo.svg" alt="Blood Buddy Logo" width="38" height="38">
+          <img src="static/images/logo.svg" alt="Blood Buddy Logo" width="38" height="38">
         </div>
         <div class="brand-text">
           <span class="brand-name">Blood Buddy</span>
@@ -162,7 +162,7 @@
 
               <!-- Graceful Fallback if WebGL/3D unavailable -->
               <div class="heart-fallback" id="heartFallback" style="display: none; opacity: 0;">
-                <img src="/static/images/heart-fallback.svg" alt="Anatomical Human Heart" width="460" height="510" class="heart-fallback-img">
+                <img src="static/images/heart-fallback.svg" alt="Anatomical Human Heart" width="460" height="510" class="heart-fallback-img">
               </div>
 
               <!-- Initial Heartbeat Loader Spinner -->
@@ -370,6 +370,42 @@
   </div>
 
   <!-- ==========================================================================
+       JAVA BACKEND REQUIREMENT NOTICE MODAL (FOR GITHUB PAGES / OFFLINE PREVIEW)
+       ========================================================================== -->
+  <div class="modal-overlay" id="backendNoticeModal" role="dialog" aria-modal="true" aria-labelledby="backendNoticeTitle">
+    <div class="modal-dialog" style="max-width: 540px;">
+      <button class="modal-close-btn" id="backendNoticeCloseBtn" aria-label="Close dialog">&times;</button>
+      
+      <div class="modal-header">
+        <div style="font-size: 2.2rem; margin-bottom: 8px;">🩸</div>
+        <h3 class="modal-title" id="backendNoticeTitle" style="color: var(--neon-coral);">Java Backend Service Required</h3>
+        <p class="modal-desc" id="backendNoticeDesc">This interactive workflow requires the active Blood Buddy Java/Tomcat server.</p>
+      </div>
+
+      <div style="background: rgba(229, 57, 53, 0.08); border: 1px solid rgba(229, 57, 53, 0.25); border-radius: var(--radius-md); padding: 16px; margin: 16px 0; font-size: 0.92rem; line-height: 1.6; color: var(--text-secondary);">
+        <p style="margin: 0 0 10px; color: var(--text-white); font-weight: 600;">GitHub Pages Static Preview:</p>
+        <p style="margin: 0 0 10px;">The responsive design system, realistic 3D anatomical heart, and ECG animation are active client-side.</p>
+        <p style="margin: 0; color: var(--text-muted); font-size: 0.86rem;">Interactive services requiring the Java backend with persistent JSON storage:</p>
+        <ul style="margin: 6px 0 0 18px; padding: 0; font-size: 0.86rem; color: var(--text-muted);">
+          <li>User Authentication &amp; Sessions (<code style="color: var(--neon-coral);">/login</code>, <code style="color: var(--neon-coral);">/register</code>)</li>
+          <li>Voluntary Donor Registration &amp; Search (<code style="color: var(--neon-coral);">/find-donors</code>, <code style="color: var(--neon-coral);">/become-donor</code>)</li>
+          <li>Blood Requisition Board &amp; Matching (<code style="color: var(--neon-coral);">/request-blood</code>, <code style="color: var(--neon-coral);">/view-requests</code>)</li>
+          <li>Private In-App Donor-Requester Chat (<code style="color: var(--neon-coral);">/messages</code>, <code style="color: var(--neon-coral);">/chat</code>)</li>
+          <li>Community Camps &amp; Emergency Admin Center (<code style="color: var(--neon-coral);">/camps</code>, <code style="color: var(--neon-coral);">/admin</code>)</li>
+        </ul>
+      </div>
+
+      <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 18px;">
+        <button class="btn btn-secondary btn-sm" id="backendNoticeDismissBtn">Got It</button>
+        <a href="https://github.com/narayana780/BloodBuddy" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+          <span>View GitHub Code &amp; Setup</span>
+          <span class="btn-icon">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
        FOOTER
        ========================================================================== -->
   <footer class="footer">
@@ -378,7 +414,7 @@
         <div>
           <div class="brand">
             <div class="brand-logo-wrap">
-              <img src="/static/images/logo.svg" alt="Blood Buddy" width="36" height="36">
+              <img src="static/images/logo.svg" alt="Blood Buddy" width="36" height="36">
             </div>
             <div class="brand-text">
               <span class="brand-name">Blood Buddy</span>
@@ -429,11 +465,11 @@
   </footer>
 
   <!-- 3D Heart Visualization (Three.js WebGL & Anatomical GLTF Model) -->
-  <script src="/static/js/three.min.js"></script>
-  <script src="/static/js/GLTFLoader.js"></script>
-  <script src="/static/js/heart-3d.js?v=3.0"></script>
+  <script src="static/js/three.min.js"></script>
+  <script src="static/js/GLTFLoader.js"></script>
+  <script src="static/js/heart-3d.js?v=3.0"></script>
 
   <!-- Frontend Interactions -->
-  <script src="/static/js/main.js"></script>
+  <script src="static/js/main.js"></script>
 </body>
 </html>
